@@ -34,7 +34,7 @@ const ProductFilter = ({
       key={key}
     >
       <p className="text-white text-lg font-medium">Choose Card</p>
-      <div className="flex gap-x-4 items-center">
+      <div className="flex flex-wrap gap-4 items-center">
         <Dropdown
           placeholder="Set"
           onChange={(item) => onSelectSet(item.value)}

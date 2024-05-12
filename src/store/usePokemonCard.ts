@@ -127,6 +127,7 @@ export const usePokemonCard = memo(() => {
   const filterByRarity = (rarity: string) => {
     setCurrentQuery((prev) => ({
       ...prev,
+      page: 1,
       q: queryReplacer(
         prev.q || "",
         "rarity",
@@ -138,6 +139,7 @@ export const usePokemonCard = memo(() => {
   const filterBySet = (set: string) => {
     setCurrentQuery((prev) => ({
       ...prev,
+      page: 1,
       q: queryReplacer(prev.q || "", "set.id", set.toLowerCase()),
     }));
   };
@@ -155,6 +157,7 @@ export const usePokemonCard = memo(() => {
   const onSearch = useCallback((search: string) => {
     setCurrentQuery((prev) => ({
       ...prev,
+      page: 1,
       q: queryReplacer(prev.q || "", "name", `${search.toLowerCase()}*`),
     }));
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -36,7 +36,7 @@ export default {
         3.5: "0.875rem",
       },
       gridTemplateColumns: {
-        "sm-product": "repeat(auto-fill, minmax(336px, 1fr))",
+        "sm-product": "repeat(auto-fill, minmax(300px, 1fr))",
         "md-product": "repeat(auto-fill, minmax(176px, 1fr))",
       },
       fontSize: {

@@ -66,12 +66,12 @@ const ProductCard = memo(
           <p className="line-clamp-1 sm:h-9 sm:line-clamp-2 sm:w-36 leading-4.5">
             {name}
           </p>
-          <div className="flex gap-x-2 items-center justify-center text-offWhite text-sm leading-[18.2px]">
+          <div className="flex gap-x-2 items-center justify-center text-offWhite text-sm leading-[18.2px] w-full flex-1">
             <p>
               {currency} {price}
             </p>
             <div className="size-1 bg-white/8 rounded" />
-            <p>{stock} Cards</p>
+            {!stock ? <p>Out of stock</p> : <p>{stock} Cards</p>}
           </div>
           {count ? (
             <QuantityButton

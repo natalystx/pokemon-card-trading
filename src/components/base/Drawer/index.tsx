@@ -32,7 +32,7 @@ const Drawer = ({
         <Vaul.Portal>
           <Vaul.Trigger>
             <Vaul.Overlay
-              className="fixed inset-0 bg-overlay"
+              className="fixed inset-0 bg-overlay z-[2]"
               onClick={() => {
                 setIsOpen(false);
               }}
@@ -40,7 +40,7 @@ const Drawer = ({
           </Vaul.Trigger>
           <Vaul.Content
             className={cn(
-              "fixed top-0",
+              "fixed top-0 z-10",
               direction === "left" ? "left-0" : "right-0",
               className
             )}

@@ -49,12 +49,16 @@ export const useCart = () => {
   const removeFromCart = (id: string) => {
     const item = cart.find((cartItem) => cartItem.data.id === id);
     if (item) {
-      const newCart = [...cart];
+      let newCart = [...cart];
       const index = newCart.findIndex((cartItem) => cartItem.data.id === id);
       newCart[index].quantity = Counter.decrementByOne(
         newCart[index].quantity,
         0
       );
+
+      if (!newCart[index].quantity) {
+        newCart = newCart.filter((cartItem) => cartItem.data.id !== id);
+      }
       setCart(newCart);
     }
   };

@@ -13,7 +13,7 @@ type NavbarProps = {
 const Navbar = ({ onSearch, onCartClick }: NavbarProps) => {
   const { search, setSearch } = useViewModel(onSearch);
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 top-0 sticky left-0 bg-dark z-[1] pt-6">
       <div
         className={cn(
           "flex flex-col sm:flex-row justify-between items-center sm:h-12 w-full gap-y-6"
