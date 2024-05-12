@@ -1,7 +1,5 @@
 # Setup guide
 
-## Installation
-
 ## Prerequisite
 
 - [Nodejs](https://nodejs.org/en/download/current)
@@ -10,7 +8,7 @@
 
 - [Get your own key](https://dev.pokemontcg.io/)
 
-## Getting Started
+## Installation
 
 ### First, install dependencies
 
