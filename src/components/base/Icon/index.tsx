@@ -1,15 +1,22 @@
 import { IconEnum, useViewModel } from "./viewmodel";
-import { cn } from "src/utils/cn";
+import { cn } from "@/utils/cn";
 
 type IconProps = {
   icon: IconEnum;
   className?: string;
-  size?: "small" | "large";
+  size?: "sm" | "md" | "lg";
 };
-const Icon = ({ icon, className, size = "small" }: IconProps) => {
+const Icon = ({ icon, className, size = "sm" }: IconProps) => {
   const { Icon } = useViewModel(icon);
   return (
-    <Icon className={cn(size === "small" ? "h-5 w-5" : "h-6 w-6", className)} />
+    <Icon
+      className={cn(
+        size === "sm" && "h-4 w-4",
+        size === "md" && "h-5 w-5",
+        size === "lg" && "h-6 w-6",
+        className
+      )}
+    />
   );
 };
 
