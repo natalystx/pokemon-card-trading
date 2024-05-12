@@ -17,6 +17,25 @@ type ProductCardProps = {
   onDecrement: () => void;
 };
 
+export const LoadingProductCard = () => {
+  return (
+    <div className="w-full h-[407px] max-h-[407px] max-w-[336px] sm:h-70 flex flex-col items-center relative justify-end sm:min-w-[176px] sm:min-h-min">
+      <div className="w-full h-[77px] bg-primary relative flex justify-center rounded-t-2xl sm:h-10">
+        {/* Image placeholder */}
+        <div className="h-[267px] w-[195px] rounded-lg absolute bottom-0 sm:h-35 sm:w-[102px] bg-gray-300 animate-pulse" />
+      </div>
+      <div className="px-4 py-[22px] flex flex-col gap-y-2 rounded-b-2xl bg-primary text-white text-center w-full items-center text-sm sm:text-xs sm:p-4">
+        {/* Name placeholder */}
+        <div className="line-clamp-1 sm:h-9 sm:line-clamp-2 sm:w-36 leading-4.5 bg-gray-300  animate-pulse rounded-lg" />
+        {/* Price placeholder */}
+        <div className="flex gap-x-2 items-center justify-center text-offWhite text-sm leading-[18.2px] animate-pulse rounded-lg" />
+        {/* Button placeholder */}
+        <div className="h-[41px] bg-gray-300 w-full animate-pulse rounded-lg" />
+      </div>
+    </div>
+  );
+};
+
 const ProductCard = memo(
   ({
     image,

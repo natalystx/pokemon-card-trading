@@ -3,6 +3,7 @@ import Icon from "@/components/base/Icon";
 import { IconEnum } from "@/components/base/Icon/viewmodel";
 import Input from "@/components/base/Input";
 import { cn } from "@/utils/cn";
+import { useViewModel } from "./viewmodel";
 
 type NavbarProps = {
   onSearch: (search: string) => void;
@@ -10,6 +11,7 @@ type NavbarProps = {
 };
 
 const Navbar = ({ onSearch, onCartClick }: NavbarProps) => {
+  const { search, setSearch } = useViewModel(onSearch);
   return (
     <div className="space-y-6">
       <div
@@ -31,10 +33,11 @@ const Navbar = ({ onSearch, onCartClick }: NavbarProps) => {
         </div>
         <div className="flex gap-x-4 items-center w-full sm:justify-end">
           <Input
+            value={search}
             wrapperClassName="w-full sm:w-[173px]"
             startIcon={<Icon icon={IconEnum.SEARCH} size="md" />}
             placeholder="Search by name"
-            onChange={(e) => onSearch(e.target.value)}
+            onChange={(e) => setSearch(e.target.value)}
           />
           <Button
             color="accent"

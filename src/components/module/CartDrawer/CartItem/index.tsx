@@ -10,6 +10,7 @@ type CartItemProps = {
   onDecrement: () => void;
   count: number;
   currency?: string;
+  disabled?: boolean;
 };
 
 const CartItem = ({
@@ -21,6 +22,7 @@ const CartItem = ({
   onDecrement,
   count,
   currency = "$",
+  disabled,
 }: CartItemProps) => {
   return (
     <div className="w-full space-y-2.5 h-fit">
@@ -32,6 +34,7 @@ const CartItem = ({
         totalPrice={totalPrice.toFixed(2)}
       />
       <QuantityButton
+        disabled={disabled}
         onDecrement={onDecrement}
         onIncrement={onIncrement}
         count={count}

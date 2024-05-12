@@ -18,7 +18,7 @@
     "react-dom": "^18.2.0",
     "react-popper": "^2.3.0",
     "rxjs": "^7.8.1",
-    "shimmershards": "^0.3.5",
+    "shimmershards": "^0.3.6",
     "tailwind-merge": "^2.3.0",
     "vaul": "^0.9.1"
   },

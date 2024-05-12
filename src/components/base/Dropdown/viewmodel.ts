@@ -6,12 +6,14 @@ type ViewModelParams = {
   items: Option[];
   initialSelectedItem?: Option;
   onChange: (item: Option) => void;
+  placement?: "bottom-end" | "bottom-start" | "top-end" | "top-start";
 };
 
 export const useViewModel = ({
   items,
   initialSelectedItem,
   onChange,
+  placement,
 }: ViewModelParams) => {
   const {
     setRefElement,
@@ -21,7 +23,7 @@ export const useViewModel = ({
     isOpen,
     setIsOpen,
   } = usePopover({
-    placement: "bottom-end",
+    placement: placement || "bottom-end",
     fallbackPlacements: ["bottom-start"],
     offset: [0, 5],
   });
@@ -50,7 +52,6 @@ export const useViewModel = ({
       }
     },
   });
-
   return {
     isOpen,
     setIsOpen,

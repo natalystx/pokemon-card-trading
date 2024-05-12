@@ -14,6 +14,8 @@ type DropdownProps = {
   placeholder: string;
   initialSelectedItem?: Option;
   onChange: (item: Option) => void;
+  disabled?: boolean;
+  placement?: "bottom-end" | "bottom-start" | "top-end" | "top-start";
 };
 
 const Dropdown = ({
@@ -21,6 +23,8 @@ const Dropdown = ({
   initialSelectedItem,
   onChange,
   placeholder,
+  placement,
+  disabled,
 }: DropdownProps) => {
   const {
     setRefElement,
@@ -34,7 +38,12 @@ const Dropdown = ({
     getToggleButtonProps,
     isOpen,
     highlightedIndex,
-  } = useViewModel({ items, initialSelectedItem, onChange });
+  } = useViewModel({
+    items,
+    initialSelectedItem,
+    onChange,
+    placement,
+  });
 
   return (
     <div className="relative w-fit">
@@ -42,6 +51,7 @@ const Dropdown = ({
       <div ref={setRefElement} className="w-fit">
         <Button
           {...getToggleButtonProps()}
+          disabled={disabled}
           className="flex-row-reverse px-4"
           color="primary"
           icon={

@@ -40,6 +40,7 @@ const CartDrawer = ({
       <div className="grow overflow-y-auto py-6 no-scrollbar space-y-6">
         {items?.map(({ data, quantity }) => (
           <CartItem
+            disabled={quantity === data.set.total}
             onDecrement={() => onDecrement(data.id)}
             onIncrement={() => onIncrement(data.id)}
             key={data.id}
