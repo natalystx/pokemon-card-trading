@@ -10,6 +10,7 @@ import { getRarities } from "../__mocks__/getRarities";
 let result: any;
 let rerender: any;
 
+vi.mock("window.scrollTo", () => vi.fn());
 vi.mock("@/repositories/pokemon.repository.ts", () => {
   const PokemonCardRepository = vi.fn();
   PokemonCardRepository.prototype.getCards = vi.fn(() => {

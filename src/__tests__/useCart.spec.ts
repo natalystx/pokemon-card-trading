@@ -6,7 +6,7 @@ import { getPokemonCard } from "../__mocks__/getPokemonCard";
 
 let result: any;
 let rerender: any;
-
+vi.mock("window.scrollTo", () => vi.fn());
 vi.mock("@/store/usePokemonCard", () => ({
   usePokemonCard: () => ({
     pokemonCards: {

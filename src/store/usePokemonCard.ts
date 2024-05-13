@@ -9,6 +9,13 @@ import { map } from "rxjs";
 import { toOption } from "@/utils/toOption";
 import { queryReplacer } from "@/utils/queryReplacer";
 
+/**
+ * @info shimmershards documentation
+ * @link https://shimmershards.dev
+ *
+ */
+
+// define shards
 const pokemonCardShard = shard<PagablePokemonCard | null>(null);
 const loadingShard = shard<boolean>(true);
 const currentQueryShard = shard<PokemonCardQuery>({
@@ -20,6 +27,7 @@ const rarityShard = shard<Option[]>([]);
 const setShard = shard<Option[]>([]);
 const totalPagesShard = shard<number>(0);
 
+// define repository service
 const pokemonRepository = new PokemonCardRepository(new PokemonCardService());
 
 export const usePokemonCard = memo(() => {
@@ -31,9 +39,11 @@ export const usePokemonCard = memo(() => {
   const [loading, setLoading] = useShard(loadingShard);
   const [totalPages, setTotalPages] = useShard(totalPagesShard);
 
+  // get pokemon types
   const getTypes = useCallback(() => {
     pokemonRepository
       .getTypes()
+      // map the response to Option type
       .pipe(map((i) => i.map((d) => toOption(d))))
       .subscribe({
         next: (types) => {
@@ -46,9 +56,11 @@ export const usePokemonCard = memo(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // get pokemon rarities
   const getRarities = useCallback(() => {
     pokemonRepository
       .getRarities()
+      // map the response to Option type
       .pipe(map((i) => i.map((d) => toOption(d))))
       .subscribe({
         next: (rarities) => {
@@ -61,9 +73,11 @@ export const usePokemonCard = memo(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // get pokemon sets
   const getSets = useCallback(() => {
     pokemonRepository
       .getSets()
+      // map the response to Option type
       .pipe(map((i) => i.map((d) => ({ label: d.name, value: d.id }))))
       .subscribe({
         next: (sets) => {
@@ -76,13 +90,16 @@ export const usePokemonCard = memo(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // get pokemon cards
   const getPokemonCards = useCallback((query: PokemonCardQuery) => {
     setLoading(true);
     pokemonRepository.getCards(query).subscribe({
       next: (cards) => {
         if (cards.totalCount === 0) {
+          // if no cards found, set total pages to 1
           setTotalPages(1);
         } else {
+          // calculate total pages
           setTotalPages(Math.ceil(cards.totalCount / currentQuery.pageSize));
         }
         setPokemonCards(cards);
@@ -96,11 +113,17 @@ export const usePokemonCard = memo(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const resetScroll = () => {
+    window.scrollTo(0, 0);
+  };
+
   const nextPage = () => {
     setCurrentQuery((prev) => ({
       ...prev,
       page: Counter.incrementByOne(prev.page || 1, 100),
     }));
+    // reset scroll to top of the page for better UX
+    resetScroll();
   };
 
   const prevPage = () => {
@@ -108,6 +131,8 @@ export const usePokemonCard = memo(() => {
       ...prev,
       page: Counter.decrementByOne(prev.page || 1, 1),
     }));
+    // reset scroll to top of the page for better UX
+    resetScroll();
   };
 
   const goToPage = (n: number) => {
@@ -115,11 +140,14 @@ export const usePokemonCard = memo(() => {
       ...prev,
       page: n,
     }));
+    // reset scroll to top of the page for better UX
+    resetScroll();
   };
 
   const filterByType = (type: string) => {
     setCurrentQuery((prev) => ({
       ...prev,
+      // queryReplacer is a helper function to replace query params
       q: queryReplacer(prev.q || "", "types", type.toLowerCase()),
     }));
   };
@@ -140,12 +168,14 @@ export const usePokemonCard = memo(() => {
     setCurrentQuery((prev) => ({
       ...prev,
       page: 1,
+      // queryReplacer is a helper function to replace query params
       q: queryReplacer(prev.q || "", "set.id", set.toLowerCase()),
     }));
   };
 
   const clearFilters = () => {
     if (currentQuery?.q) {
+      // reset query to default
       setCurrentQuery((prev) => ({
         ...prev,
         page: 1,
@@ -158,6 +188,7 @@ export const usePokemonCard = memo(() => {
     setCurrentQuery((prev) => ({
       ...prev,
       page: 1,
+      // queryReplacer is a helper function to replace query params
       q: queryReplacer(prev.q || "", "name", `${search.toLowerCase()}*`),
     }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
